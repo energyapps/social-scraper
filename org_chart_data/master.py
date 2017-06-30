@@ -4,6 +4,7 @@ from BeautifulSoup import BeautifulSoup
 import json
 
 with open('social_handles.csv', 'rb') as f:
+# Below commented out is the previous path on EC2, update the above to whatever path is needed for Jenkins
 # with open('/home/ec2-user/org_chart_data/social_handles.csv', 'rb') as f:	
     reader = csv.reader(f)
     next(reader)
