@@ -23,7 +23,7 @@ There are two scripts that are housed here. Both of them can be run locally to s
 	- master.py
 		- This is the script that collects follower data from instagram, twitter, youtube and facebook. 
 		- Note, facebook has been turned off in order to prevent it from breaking. Please refer to the "known problems" section below for more information.
-		- NOTE: While this doesn't appear to work locally for me at the moment, I have confirmed that it works on the EC2 instance without any changes.  
+		- NOTE: If trying to reproduce this script locally, you may see errors based on the twitter portion not working. This issue is captured in this ticket: https://github.com/energyapps/social-scraper/issues/2
 	- social_handles.csv
 		- This csv is a list of the social media handles that you will scrape for follower data.
 * hourly_follower_count/
@@ -31,6 +31,7 @@ There are two scripts that are housed here. Both of them can be run locally to s
 		- Collects follower numbers hourly for DOE twitter, DOE instagram, DOE youtube, and Secretary's twitter.
 		- If you have other accounts to add, they can be easily added into the bottom section of the script. 
 		- Appends the most recent data onto social_data.csv
+		- NOTE: If trying to reproduce this script locally, you may see errors based on the twitter portion not working. This issue is captured in this ticket: https://github.com/energyapps/social-scraper/issues/2
 		- **NOTE** the file paths in this currently are from the EC2 instance and would need to be updated to run either locally or on jenkins. 
 	- social_data.csv
 		- Ongoing tally of followers on the above listed accounts. Added to hourly. 
