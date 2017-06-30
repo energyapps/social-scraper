@@ -6,9 +6,11 @@ There are two scripts that are housed here. Both of them can be run locally to s
 1. Org Chart Data
 	- Collects the data for the [DOE Social Media Org Chart](https://energyapps.github.io/social)
 	- Ideally will collect data either once a day or once a week. **NOTE** does not need to collect data hourly. 
+	- Resulting data should look like [this](https://s3-us-west-2.amazonaws.com/energy2/social/all_social_data.csv).
 2. Hourly Follower Count
 	- Collects the data for the charts found at https://energyapps.github.io/social/followers and the matrix pages. 
 	- Collects data hourly in order to track the growth of audience over time. 
+	- Resulting data should look like [this](https://s3-us-west-2.amazonaws.com/energy2/social/social_data.csv).
 
 **The goal of this repo is get each of these scripts onto a Jenkin's Job and served onto `https://energy.gov/api/social-media/` with read access allowed via CORS rules to `energyapps.github.io/social`. 
 
