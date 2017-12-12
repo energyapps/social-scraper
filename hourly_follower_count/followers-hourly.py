@@ -1,11 +1,14 @@
+import sys
+sys.path.append('/opt/energyapps')
 import csv
 import requests
 import json
+import energy_config
 from time import gmtime, strftime
 time = strftime("%m/%d/%y %H:%M")
 print time
 
-with open('/home/ec2-user/scrape/social_data.csv', 'rb') as f:
+with open('./social_data.csv', 'rb') as f:
     reader = csv.reader(f)
     your_list = list(reader)
 
@@ -13,20 +16,18 @@ with open('/home/ec2-user/scrape/social_data.csv', 'rb') as f:
 
 # define the function blocks
 def facebook(handle):
-	# if handle != "":		
+	 if handle != "":
 	# 	# must update this every few hours/whenever its run. 
-	# 	token = 'EAADqjjNdGm4BAGfKBgbE0Rt8ZB61xbZCNqz8i9bqbQD00GZA6kVbZAdFlovwhM6TV01tksySluQ0PVezRaSCwOdlA6ZClJ8fUxErQZAncgPtTu54XtBDrdknBCRNQGsrZC3uSXfrxcWZBW4LqdZAYQZAVwjG2v3e18r4XGsewIHfam1SN6vMr5ZBuk9'	
+                token = energy_config.fb['api_token']
+	 	url = 'https://graph.facebook.com/v2.8/'+ handle +'/?fields=fan_count&access_token=' + token
 
-	# 	url = 'https://graph.facebook.com/v2.8/'+ handle +'/?fields=fan_count&access_token=' + token
+	 	response = requests.get(url)
+	 	data = response.content
+	 	data = json.loads(data)
 
-	# 	response = requests.get(url)
-	# 	data = response.content
-	# 	data = json.loads(data)
-
-	# 	return data['fan_count']
-	# 	return ""
-	# else:
-	return ""
+        	return data['fan_count']
+	 else:
+	        return ""
 	
 def twitter(handle):
 	if handle != "":		
@@ -80,7 +81,7 @@ def youtube(handle):
 	else:
 		return ""
 
-# DOEfacebook = facebook()
+DOEfacebook = facebook("energygov")
 DOEtwitter = twitter("energy")
 DOEinstagram = instagram("energy")
 DOEyoutube = youtube("USdepartmentofenergy")
@@ -89,9 +90,9 @@ SECtwitter = twitter("secretaryperry")
 # SECinstagram = instagram()
 # SECyoutube = youtube()
 
-new_row = [time,"",DOEtwitter,DOEinstagram,DOEyoutube,"",SECtwitter,"",""]
+new_row = [time,DOEfacebook,DOEtwitter,DOEinstagram,DOEyoutube,"",SECtwitter,"",""]
 your_list.append(new_row)
 
-outfile = open("/home/ec2-user/scrape/social_data_temp.csv", "wb")
+outfile = open("./social_data_temp.csv", "wb")
 writer = csv.writer(outfile)
 writer.writerows(your_list)
